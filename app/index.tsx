@@ -1,28 +1,53 @@
 import { StyleSheet, ImageBackground } from "react-native";
 import StartGameScreen from "./screens/StartGameScreen";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameScreen from "./screens/GameScreen";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/color";
 import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
+
+SplashScreen.preventAutoHideAsync();
 
 export default function HomeScreen() {
-  const [userNumber, setUserNumber] = useState<number>();
+  const [userNumber, setUserNumber] = useState<number | null>();
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [roundsNumber, setRoundsNumber] = useState<number>(0);
 
-  useFonts({
-    'open-sans': require("../assets/fonts/OpenSans-Regular.ttf"),
-    'open-sans-bold': require("../assets/fonts/OpenSans-Bold.ttf")
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("../assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hide();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const startNewGameHandler = () => {
+    setUserNumber(null);
+    setRoundsNumber(0);
+  };
 
   const pickUserNumber = (number: number) => {
     setUserNumber(number);
     setIsGameOver(false);
   };
 
-  const GameOverHandler = () => {
+  const GameOverHandler = (roundsNumber: number) => {
+    setRoundsNumber(roundsNumber);
     setIsGameOver(true);
   };
 
@@ -33,7 +58,13 @@ export default function HomeScreen() {
     );
   }
   if (isGameOver && userNumber) {
-    screen = <GameOverScreen userNumber={userNumber} />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={roundsNumber}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (
