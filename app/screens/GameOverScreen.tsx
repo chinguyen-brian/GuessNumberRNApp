@@ -1,6 +1,7 @@
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import Title from "@/components/ui/Title";
 import Colors from "@/constants/color";
+import { deviceWidth } from "@/constants/dimension";
 import { Image, View, StyleSheet, Text } from "react-native";
 
 type GameOverProps = {
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     borderWidth: 3,
     borderColor: Colors.primary800,
-    borderRadius: 150,
-    width: 300,
-    height: 300,
+    borderRadius: deviceWidth < 380 ? 90 : 150,
+    width: deviceWidth < 380 ? 180 : 300,
+    height: deviceWidth < 380 ? 180 : 300,
     overflow: "hidden",
-    margin: 36,
+    margin: deviceWidth < 380 ? 24 : 36,
   },
   image: {
     width: "100%",
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
   },
   summaryText: {
     fontFamily: "open-sans",
-    fontSize: 24,
+    fontSize: deviceWidth < 380 ? 18 : 24,
     textAlign: "center",
-    marginVertical: 24,
+    marginVertical: deviceWidth < 380 ? 18 : 24,
   },
   highlightText: {
     fontFamily: "open-sans-bold",

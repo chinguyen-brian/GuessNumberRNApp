@@ -1,4 +1,5 @@
 import Colors from "@/constants/color";
+import { deviceWidth } from "@/constants/dimension";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 
 type PrimaryButtonProps = {
@@ -35,8 +36,8 @@ const styles = StyleSheet.create({
   },
   buttonInnerContainer: {
     backgroundColor: Colors.primary500,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: deviceWidth < 380 ? 6 : 8,
+    paddingHorizontal: deviceWidth < 380 ? 12 : 16,
     elevation: 2,
   },
   buttonText: {

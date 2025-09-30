@@ -3,6 +3,7 @@ import InstuctionText from "@/components/ui/InstructionText";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import Title from "@/components/ui/Title";
 import Colors from "@/constants/color";
+import { deviceWidth } from "@/constants/dimension";
 import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
 
@@ -69,14 +70,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   numberInput: {
-    height: 60,
-    width: 50,
-    fontSize: 32,
+    height: deviceWidth < 380 ? 50 : 60,
+    width: deviceWidth < 380 ? 40 : 50,
+    fontSize: deviceWidth < 380 ? 24 : 32,
     fontWeight: "bold",
     borderBottomColor: Colors.accent500,
     borderBottomWidth: 2,
     color: Colors.accent500,
-    marginVertical: 8,
+    marginVertical: deviceWidth < 380 ? 4 : 8,
     textAlign: "center",
   },
   buttonsContainer: {

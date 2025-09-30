@@ -1,4 +1,5 @@
 import Colors from "@/constants/color";
+import { deviceWidth } from "@/constants/dimension";
 import { StyleSheet, Text } from "react-native";
 
 export default function InstuctionText({
@@ -15,6 +16,6 @@ const styles = StyleSheet.create({
   instructionText: {
     fontFamily: 'open-sans',
     color: Colors.accent500,
-    fontSize: 24,
+    fontSize: deviceWidth < 380 ? 18 : 24,
   },
 });

@@ -1,4 +1,5 @@
 import Colors from "@/constants/color";
+import { deviceWidth } from "@/constants/dimension";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function GuessLogItem({
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 40,
         padding: 12,
-        marginVertical: 8,
+        marginVertical: deviceWidth < 380 ? 4 : 8,
         backgroundColor: Colors.accent500,
         flexDirection: 'row',
         justifyContent: 'space-between',
